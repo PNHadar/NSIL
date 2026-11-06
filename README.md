@@ -14,7 +14,7 @@ An NSI-based commercialization pathway (in close coordination with **MGB Innovat
 ## Program Leadership
 
 - **Director**: Sydney S. Cash, MD, PhD (Neurology)
-- **Associate Director**: Peter N. Hadar, MD, MS (Neurology)
+- **Associate Director**: Peter N. Hadar, MD, MSc (Neurology)
 - **Clinical Innovation & Strategic Partnerships**: Jennifer Morganroth, MD, MBA (Neurology)
 - **Industry & Technology**: William Brian Gormley, MD, MPH, MBA (Neurosurgery)
 - **NSI Executive Liaison**: Meghan D. Kotarski, MBA (NSI)
