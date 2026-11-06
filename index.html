@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- MANDATORY per modern-web-guidance `dark-mode` & `dark-mode-toggle` -->
-    <meta name="color-scheme" content="light dark" />
+    <!-- MGB Light Mode is the default unless the user explicitly toggles Dark Mode -->
+    <meta name="color-scheme" content="light" />
     <script>
       try {
         const storedScheme = localStorage.getItem('mgb-launchpad-color-scheme');
-        if (storedScheme === 'light' || storedScheme === 'dark') {
-          document.querySelector('meta[name="color-scheme"]').content = storedScheme;
-        }
+        document.querySelector('meta[name="color-scheme"]').content =
+          storedScheme === 'dark' ? 'dark' : 'light';
       } catch (e) {}
     </script>
     <!-- MANDATORY per modern-web-guidance `respect-os-text-scale` -->

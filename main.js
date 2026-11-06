@@ -44,20 +44,15 @@ if (!('closedBy' in HTMLDialogElement.prototype)) {
   });
 }
 
-// 3. Two-state dark mode toggle per `dark-mode-toggle`
+// 3. Light-by-default MGB color scheme toggle
 const STORAGE_KEY = 'mgb-launchpad-color-scheme';
 const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const themeToggleLabel = document.getElementById('theme-toggle-label');
 const themeToggleIcon = document.getElementById('theme-toggle-icon');
-const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 function getRenderedScheme() {
-  const content = metaColorScheme?.content || 'light dark';
-  if (content === 'dark' || content === 'light') {
-    return content;
-  }
-  return darkMediaQuery.matches ? 'dark' : 'light';
+  return metaColorScheme?.content === 'dark' ? 'dark' : 'light';
 }
 
 function updateThemeButtonUI() {
@@ -66,11 +61,11 @@ function updateThemeButtonUI() {
   if (current === 'dark') {
     themeToggleIcon.textContent = '☀';
     themeToggleLabel.textContent = 'Light Mode';
-    themeToggleBtn.setAttribute('aria-label', 'Switch to light color scheme');
+    themeToggleBtn.setAttribute('aria-label', 'Switch to MGB light color scheme');
   } else {
     themeToggleIcon.textContent = '☾';
     themeToggleLabel.textContent = 'Dark Mode';
-    themeToggleBtn.setAttribute('aria-label', 'Switch to dark color scheme');
+    themeToggleBtn.setAttribute('aria-label', 'Switch to MGB dark color scheme');
   }
 }
 
@@ -80,31 +75,24 @@ if (themeToggleBtn && metaColorScheme) {
   themeToggleBtn.addEventListener('click', () => {
     const currentRendered = getRenderedScheme();
     const targetScheme = currentRendered === 'dark' ? 'light' : 'dark';
-    const systemScheme = darkMediaQuery.matches ? 'dark' : 'light';
 
     try {
-      if (targetScheme === systemScheme) {
-        // Target matches current system preference: remove stored override so OS preference resumes
+      if (targetScheme === 'light') {
         localStorage.removeItem(STORAGE_KEY);
-        metaColorScheme.content = 'light dark';
       } else {
-        localStorage.setItem(STORAGE_KEY, targetScheme);
-        metaColorScheme.content = targetScheme;
+        localStorage.setItem(STORAGE_KEY, 'dark');
       }
     } catch {
-      metaColorScheme.content = targetScheme;
+      // Ignore storage restrictions
     }
 
-    updateThemeButtonUI();
-  });
-
-  darkMediaQuery.addEventListener('change', () => {
+    metaColorScheme.content = targetScheme;
     updateThemeButtonUI();
   });
 
   window.addEventListener('storage', (event) => {
     if (event.key === STORAGE_KEY) {
-      metaColorScheme.content = event.newValue ?? 'light dark';
+      metaColorScheme.content = event.newValue === 'dark' ? 'dark' : 'light';
       updateThemeButtonUI();
     }
   });

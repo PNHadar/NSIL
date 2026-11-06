@@ -135,29 +135,6 @@
     --scrollbar-thumb: #6fb8be;
     --scrollbar-track: #e6f3f4;
 
-    /* MANDATORY: Fallback for browsers without light-dark() support */
-    @media (prefers-color-scheme: dark) {
-      --bg-canvas: var(--bg-canvas-dark);
-      --bg-surface: var(--bg-surface-dark);
-      --bg-elevated: var(--bg-elevated-dark);
-      --bg-subtle: var(--bg-subtle-dark);
-      --bg-glass: var(--bg-glass-dark);
-      --text-primary: var(--text-primary-dark);
-      --text-secondary: var(--text-secondary-dark);
-      --text-muted: var(--text-muted-dark);
-      --border-subtle: var(--border-subtle-dark);
-      --border-strong: var(--border-strong-dark);
-      --brand-teal: var(--accent-teal-dark);
-      --brand-navy: var(--accent-navy-dark);
-      --brand-gold: var(--accent-gold-dark);
-      --brand-violet: var(--accent-violet-dark);
-      --brand-emerald: var(--accent-emerald-dark);
-      --shadow-card: var(--shadow-card-dark);
-      --shadow-hover: var(--shadow-hover-dark);
-      --scrollbar-thumb: #3b8ea5;
-      --scrollbar-track: #041938;
-    }
-
     /* Native CSS light-dark() adaptive tokens */
     @supports (color: light-dark(white, black)) {
       --bg-canvas: light-dark(var(--bg-canvas-light), var(--bg-canvas-dark));
@@ -181,11 +158,30 @@
       --scrollbar-track: light-dark(#e6f3f4, #041938);
     }
 
-    /* MANDATORY: Apply color-scheme to :root and map <meta name="color-scheme"> override via :has() */
-    color-scheme: light dark;
+    /* Default to MGB Light Mode; switch to Dark Mode only when explicitly toggled via <meta name="color-scheme" content="dark"> */
+    color-scheme: light;
 
     &:has(> head > meta[name="color-scheme"][content="dark"]) {
       color-scheme: dark;
+      --bg-canvas: var(--bg-canvas-dark);
+      --bg-surface: var(--bg-surface-dark);
+      --bg-elevated: var(--bg-elevated-dark);
+      --bg-subtle: var(--bg-subtle-dark);
+      --bg-glass: var(--bg-glass-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-secondary: var(--text-secondary-dark);
+      --text-muted: var(--text-muted-dark);
+      --border-subtle: var(--border-subtle-dark);
+      --border-strong: var(--border-strong-dark);
+      --brand-teal: var(--accent-teal-dark);
+      --brand-navy: var(--accent-navy-dark);
+      --brand-gold: var(--accent-gold-dark);
+      --brand-violet: var(--accent-violet-dark);
+      --brand-emerald: var(--accent-emerald-dark);
+      --shadow-card: var(--shadow-card-dark);
+      --shadow-hover: var(--shadow-hover-dark);
+      --scrollbar-thumb: #3b8ea5;
+      --scrollbar-track: #041938;
     }
 
     &:has(> head > meta[name="color-scheme"][content="light"]) {
