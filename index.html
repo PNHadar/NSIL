@@ -294,14 +294,14 @@
                 <strong>NSI</strong> provides the clinical neuroscience focus and investigator community. <strong>NSI Launchpad</strong>—in close partnership with <strong>MGB Innovation</strong>—brings dedicated commercialization expertise, IP strategy, and venture infrastructure.
               </p>
             </div>
-            <a
-              href="#0"
-              data-dead-link
+            <button
+              type="button"
               class="btn btn--outline btn--sm"
               style="background: #ffffff; color: #003a96; border-color: #ffffff;"
+              data-engage-track="General Program Leadership Inquiry"
             >
               Connect with Program Leadership &rarr;
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -1089,13 +1089,13 @@
                 <li><span class="stage-list__check" aria-hidden="true">&#9733;</span><span><strong>Disease-Directed Fellows &amp; Tracks:</strong> Sponsor targeted innovation in ALS, Epilepsy, Brain Tumors, Stroke, TBI, or Alzheimer's/Neurodegeneration.</span></li>
               </ul>
               <div style="margin-block-start: auto; padding-block-start: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.6rem;">
-                <a
-                  href="#0"
-                  data-dead-link
+                <button
+                  type="button"
                   class="btn btn--philanthropy btn--sm"
+                  data-engage-track="Philanthropic Giving &amp; Launchpad Naming Partnership"
                 >
                   Explore Philanthropic Naming &rarr;
-                </a>
+                </button>
                 <a
                   href="https://giving.massgeneral.org/"
                   target="_blank"
@@ -1136,13 +1136,13 @@
                 <li><span class="stage-list__check" aria-hidden="true">&#10003;</span><span><strong>Advisory Board &amp; Mentor Network:</strong> Join our external circle of VCs, serial entrepreneurs, and biopharma/medtech BD leaders.</span></li>
               </ul>
               <div style="margin-block-start: auto; padding-block-start: 0.75rem;">
-                <a
-                  href="#0"
-                  data-dead-link
+                <button
+                  type="button"
                   class="btn btn--primary btn--sm"
+                  data-engage-track="Venture Investor / Strategic Partner / Mentor Network"
                 >
                   Request Investor &amp; Mentor Access &rarr;
-                </a>
+                </button>
               </div>
             </article>
 
@@ -1183,13 +1183,13 @@
                 >
                   Take MGB NSI Feedback Survey &#8599;
                 </a>
-                <a
-                  href="#0"
-                  data-dead-link
+                <button
+                  type="button"
                   class="btn btn--outline btn--sm"
+                  data-engage-track="Prospective Venture Team (Stage 1 Incubator / Stage 2 Accelerator)"
                 >
                   Register Team or Co-Founder Interest &rarr;
-                </a>
+                </button>
               </div>
             </article>
           </div>
@@ -1606,10 +1606,10 @@
           <div>
             <span class="eyebrow" style="margin-block-end: 0.4rem;">MGB NSI Launchpad Portal</span>
             <h2 id="dialog-title-engage" style="font-size: var(--text-xl);">
-              Connect With the MGB NSI Launchpad
+              Email MGB NSI Launchpad Leadership
             </h2>
             <p class="text-muted" style="font-size: var(--text-xs); margin-block-start: 0.25rem;">
-              Inaugural Tier 1 applications open Late November / December 2026. Reach out below for team briefings, philanthropic naming, or investor/mentor partnerships.
+              Sends directly to <strong>Dr. Sydney Cash</strong> (<span style="font-family: var(--font-mono);">scash@mgh.harvard.edu</span>) and <strong>Dr. Peter Hadar</strong> (<span style="font-family: var(--font-mono);">phadar@mgh.harvard.edu</span>). Fill in optional details below to pre-populate your draft, then choose your preferred email client.
             </p>
           </div>
           <button
@@ -1633,7 +1633,6 @@
               name="track"
               class="search-input"
               style="border-radius: var(--radius-sm);"
-              required
             >
               <option value="Prospective Venture Team (Stage 1 Incubator / Stage 2 Accelerator)">
                 Prospective Venture Team (Stage 1 Incubator / Stage 2 Accelerator)
@@ -1647,8 +1646,8 @@
               <option value="External Co-Founder / Operator Matching">
                 External Co-Founder / Operator Matching
               </option>
-              <option value="Departmental Briefing Inquiry (Neurology / Neurosurgery)">
-                Departmental Briefing Inquiry (Neurology / Neurosurgery)
+              <option value="General Program Leadership Inquiry">
+                General Program Leadership Inquiry
               </option>
             </select>
           </div>
@@ -1656,14 +1655,13 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.85rem;">
             <div>
               <label for="inquiry-name" style="display: block; font-size: var(--text-xs); font-weight: 700; margin-block-end: 0.35rem;">
-                Full Name &amp; Credentials
+                Full Name &amp; Credentials <span class="text-muted" style="font-weight: 400;">(optional)</span>
               </label>
               <input
                 type="text"
                 id="inquiry-name"
                 name="name"
                 autocomplete="name"
-                required
                 placeholder="Dr. Jane Doe, MD, PhD"
                 class="search-input"
                 style="border-radius: var(--radius-sm);"
@@ -1671,15 +1669,14 @@
             </div>
             <div>
               <label for="inquiry-email" style="display: block; font-size: var(--text-xs); font-weight: 700; margin-block-end: 0.35rem;">
-                Email Address
+                Your Email Address <span class="text-muted" style="font-weight: 400;">(optional)</span>
               </label>
               <input
                 type="email"
                 id="inquiry-email"
                 name="email"
-                 inputmode="email"
+                inputmode="email"
                 autocomplete="email"
-                required
                 placeholder="jdoe@mgb.org"
                 class="search-input"
                 style="border-radius: var(--radius-sm);"
@@ -1689,7 +1686,7 @@
 
           <div>
             <label for="inquiry-affiliation" style="display: block; font-size: var(--text-xs); font-weight: 700; margin-block-end: 0.35rem;">
-              Department, Hospital, Fund, or Organization
+              Department, Hospital, Fund, or Organization <span class="text-muted" style="font-weight: 400;">(optional)</span>
             </label>
             <input
               type="text"
@@ -1704,17 +1701,64 @@
 
           <div>
             <label for="inquiry-message" style="display: block; font-size: var(--text-xs); font-weight: 700; margin-block-end: 0.35rem;">
-              Brief Summary (Venture Concept, Philanthropic Interest, or Investment Focus)
+              Brief Summary <span class="text-muted" style="font-weight: 400;">(optional)</span>
             </label>
             <textarea
               id="inquiry-message"
               name="message"
-              rows="4"
-              required
+              rows="3"
               placeholder="Share a brief overview of your neuroscience concept, philanthropic goals, or investment/mentorship interest..."
               class="search-input"
               style="border-radius: var(--radius-sm); resize: vertical;"
             ></textarea>
+          </div>
+
+          <div
+            style="
+              padding: 0.9rem 1rem;
+              border-radius: var(--radius-md);
+              background-color: var(--bg-elevated);
+              border: 1px solid var(--border-subtle);
+              display: flex;
+              flex-direction: column;
+              gap: 0.65rem;
+            "
+          >
+            <span style="font-size: var(--text-xs); font-weight: 700; color: var(--text-primary);">
+              Open Pre-Addressed Email Draft (<span style="font-family: var(--font-mono); font-weight: 600;">scash@mgh.harvard.edu, phadar@mgh.harvard.edu</span>):
+            </span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
+              <a
+                id="inquiry-mailto-link"
+                href="mailto:scash@mgh.harvard.edu,phadar@mgh.harvard.edu?subject=%5BMGB%20NSI%20Launchpad%5D%20Inquiry"
+                class="btn btn--primary btn--sm"
+              >
+                Open Default Email App &rarr;
+              </a>
+              <a
+                id="inquiry-outlook-link"
+                href="https://outlook.office.com/mail/deeplink/compose?to=scash%40mgh.harvard.edu%2Cphadar%40mgh.harvard.edu&amp;subject=%5BMGB%20NSI%20Launchpad%5D%20Inquiry"
+                target="_blank"
+                class="btn btn--outline btn--sm"
+              >
+                Open in MGB / Outlook Web &#8599;
+              </a>
+              <a
+                id="inquiry-gmail-link"
+                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=scash%40mgh.harvard.edu%2Cphadar%40mgh.harvard.edu&amp;su=%5BMGB%20NSI%20Launchpad%5D%20Inquiry"
+                target="_blank"
+                class="btn btn--outline btn--sm"
+              >
+                Open in Gmail &#8599;
+              </a>
+              <button
+                type="button"
+                id="inquiry-copy-btn"
+                class="btn btn--outline btn--sm"
+              >
+                Copy Emails &amp; Draft
+              </button>
+            </div>
           </div>
 
           <p
@@ -1723,7 +1767,7 @@
             role="status"
             aria-live="polite"
             style="
-              padding: 0.75rem 1rem;
+              padding: 0.7rem 0.95rem;
               border-radius: var(--radius-sm);
               background-color: var(--bg-elevated);
               color: var(--brand-teal);
@@ -1732,17 +1776,14 @@
             "
           ></p>
 
-          <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; padding-block-start: 0.5rem;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem;">
             <button
               type="button"
               class="btn btn--outline btn--sm"
               commandfor="modal-engage"
               command="close"
             >
-              Cancel
-            </button>
-            <button type="submit" class="btn btn--primary btn--sm">
-              Compose Inquiry to Launchpad Leadership &rarr;
+              Close
             </button>
           </div>
         </form>

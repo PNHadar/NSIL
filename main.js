@@ -144,15 +144,69 @@ if (searchInput) {
   });
 }
 
-// 5. Dead-link placeholder buttons + Audience-Specific Inquiry / Engagement Modal Preset Buttons
-document.querySelectorAll('[data-dead-link]').forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-  });
-});
-
+// 5. Audience-Specific Inquiry / Engagement Modal + Live Email Compose Links
+const RECIPIENT_EMAILS = 'scash@mgh.harvard.edu,phadar@mgh.harvard.edu';
 const inquiryDialog = document.getElementById('modal-engage');
 const inquiryTrackSelect = document.getElementById('inquiry-track');
+const inquiryForm = document.getElementById('launchpad-inquiry-form');
+const inquiryFeedback = document.getElementById('inquiry-feedback');
+const mailtoLink = document.getElementById('inquiry-mailto-link');
+const outlookLink = document.getElementById('inquiry-outlook-link');
+const gmailLink = document.getElementById('inquiry-gmail-link');
+const copyBtn = document.getElementById('inquiry-copy-btn');
+
+function buildEmailParts() {
+  const formData = inquiryForm ? new FormData(inquiryForm) : null;
+  const track = String(formData?.get('track') || 'General Program Leadership Inquiry').trim();
+  const name = String(formData?.get('name') || '').trim();
+  const email = String(formData?.get('email') || '').trim();
+  const affiliation = String(formData?.get('affiliation') || '').trim();
+  const message = String(formData?.get('message') || '').trim();
+
+  const subjectText = name
+    ? `[MGB NSI Launchpad] ${track} — ${name}`
+    : `[MGB NSI Launchpad] ${track}`;
+
+  const lines = [
+    'Dear Dr. Cash and Dr. Hadar,',
+    '',
+    `I am reaching out regarding the MGB NSI Launchpad (${track}).`,
+    '',
+  ];
+  if (name) lines.push(`Name: ${name}`);
+  if (email) lines.push(`Email: ${email}`);
+  if (affiliation) lines.push(`Department / Organization: ${affiliation}`);
+  if (name || email || affiliation) lines.push('');
+  if (message) {
+    lines.push('Summary / Message:');
+    lines.push(message);
+    lines.push('');
+  }
+  lines.push('Best regards,');
+  if (name) lines.push(name);
+
+  const bodyText = lines.join('\r\n');
+  return { subjectText, bodyText };
+}
+
+function syncInquiryEmailLinks() {
+  const { subjectText, bodyText } = buildEmailParts();
+  const encodedTo = encodeURIComponent(RECIPIENT_EMAILS);
+  const encodedSubject = encodeURIComponent(subjectText);
+  const encodedBody = encodeURIComponent(bodyText);
+
+  if (mailtoLink) {
+    mailtoLink.href = `mailto:${RECIPIENT_EMAILS}?subject=${encodedSubject}&body=${encodedBody}`;
+  }
+  if (outlookLink) {
+    outlookLink.href = `https://outlook.office.com/mail/deeplink/compose?to=${encodedTo}&subject=${encodedSubject}&body=${encodedBody}`;
+  }
+  if (gmailLink) {
+    gmailLink.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedTo}&su=${encodedSubject}&body=${encodedBody}`;
+  }
+}
+
+syncInquiryEmailLinks();
 
 document.querySelectorAll('[data-engage-track]').forEach((trigger) => {
   trigger.addEventListener('click', () => {
@@ -160,36 +214,47 @@ document.querySelectorAll('[data-engage-track]').forEach((trigger) => {
     if (inquiryTrackSelect && track) {
       inquiryTrackSelect.value = track;
     }
+    if (inquiryFeedback) {
+      inquiryFeedback.hidden = true;
+    }
+    syncInquiryEmailLinks();
     if (inquiryDialog && inquiryDialog instanceof HTMLDialogElement && !inquiryDialog.open) {
       inquiryDialog.showModal();
     }
   });
 });
 
-const inquiryForm = document.getElementById('launchpad-inquiry-form');
-const inquiryFeedback = document.getElementById('inquiry-feedback');
-
 if (inquiryForm) {
+  inquiryForm.addEventListener('input', syncInquiryEmailLinks);
+  inquiryForm.addEventListener('change', syncInquiryEmailLinks);
   inquiryForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    const formData = new FormData(inquiryForm);
-    const name = formData.get('name') || '';
-    const email = formData.get('email') || '';
-    const affiliation = formData.get('affiliation') || '';
-    const track = formData.get('track') || 'General Inquiry';
-    const message = formData.get('message') || '';
+    syncInquiryEmailLinks();
+    mailtoLink?.click();
+  });
+}
 
-    const subject = encodeURIComponent(`[MGB NSI Launchpad] ${track} — ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nAffiliation / Organization: ${affiliation}\nPathway: ${track}\n\nMessage / Summary:\n${message}`
-    );
+if (mailtoLink && inquiryFeedback) {
+  mailtoLink.addEventListener('click', () => {
+    syncInquiryEmailLinks();
+    inquiryFeedback.hidden = false;
+    inquiryFeedback.textContent =
+      'Opening your default email app addressed to scash@mgh.harvard.edu & phadar@mgh.harvard.edu. (Using browser webmail instead? Click "Open in MGB / Outlook Web" or "Open in Gmail" above.)';
+  });
+}
 
-    if (inquiryFeedback) {
+if (copyBtn && inquiryFeedback) {
+  copyBtn.addEventListener('click', async () => {
+    const { subjectText, bodyText } = buildEmailParts();
+    const clip = `To: scash@mgh.harvard.edu, phadar@mgh.harvard.edu\nSubject: ${subjectText}\n\n${bodyText}`;
+    try {
+      await navigator.clipboard.writeText(clip);
       inquiryFeedback.hidden = false;
       inquiryFeedback.textContent =
-        'Thank you! Opening your email client with your pre-formatted MGB NSI Launchpad inquiry...';
+        'Copied recipients (scash@mgh.harvard.edu, phadar@mgh.harvard.edu) and draft message to your clipboard!';
+    } catch {
+      inquiryFeedback.hidden = false;
+      inquiryFeedback.textContent = 'Recipients: scash@mgh.harvard.edu, phadar@mgh.harvard.edu';
     }
-
-    window.location.href = `mailto:phadar@mgb.org?cc=scash@mgh.harvard.edu,jmorganroth@mgb.org&subject=${subject}&body=${body}`;
   });
 }
