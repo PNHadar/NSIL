@@ -144,7 +144,13 @@ if (searchInput) {
   });
 }
 
-// 5. Audience-Specific Inquiry / Engagement Modal Preset Buttons
+// 5. Dead-link placeholder buttons + Audience-Specific Inquiry / Engagement Modal Preset Buttons
+document.querySelectorAll('[data-dead-link]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+  });
+});
+
 const inquiryDialog = document.getElementById('modal-engage');
 const inquiryTrackSelect = document.getElementById('inquiry-track');
 
